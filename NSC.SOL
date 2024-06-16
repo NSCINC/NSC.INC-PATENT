@@ -1,0 +1,64 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract CompanyRegistration {
+    struct Company {
+        string name;
+        string registrationNumber;
+        string companyAddress;
+        string founder;
+        string role;
+        address owner;
+    }
+
+    Company public company;
+
+    event CompanyRegistered(
+        string name,
+        string registrationNumber,
+        string companyAddress,
+        string founder,
+        string role,
+        address owner
+    );
+
+    constructor() {
+        company.name = "NSC Inc.";
+        company.registrationNumber = "12-07-1999";
+        company.companyAddress = "São Paulo, Brazil";
+        company.founder = "Lucas Januario do Nascimento";
+        company.role = "Founder & Global CEO";
+        company.owner = msg.sender;
+
+        emit CompanyRegistered(
+            company.name,
+            company.registrationNumber,
+            company.companyAddress,
+            company.founder,
+            company.role,
+            company.owner
+        );
+    }
+
+    function getCompanyDetails()
+        public
+        view
+        returns (
+            string memory name,
+            string memory registrationNumber,
+            string memory companyAddress,
+            string memory founder,
+            string memory role,
+            address owner
+        )
+    {
+        return (
+            company.name,
+            company.registrationNumber,
+            company.companyAddress,
+            company.founder,
+            company.role,
+            company.owner
+        );
+    }
+}
